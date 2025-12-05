@@ -100,9 +100,16 @@ void addEmployee(vector<Employee>& employees) {
     do {
         cout << "\n| Set the salary: ";
         cin >> newemp.salary;
-        if (newemp.salary < 0) {
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "\n| Please enter a valid number!" << endl;
+            newemp.salary = -1;
+        }else if (newemp.salary < 0) {
             cout << "\n| The salary must be positive!" << endl;
         }
+
     } while (newemp.salary < 0);
 
     employees.push_back(newemp);
@@ -122,7 +129,7 @@ void editEmployee(vector<Employee>& employees) {
             return;
         }
 
-        cout << "\n\n| Editing: " << employees[index].name << endl;
+        cout << "\n| Editing: " << employees[index].name << endl;
 
         cin.ignore();
         cout << "\n| Set the new name: ";
@@ -132,7 +139,14 @@ void editEmployee(vector<Employee>& employees) {
         do {
             cout << "\n| Set the new salary: ";
             cin >> newSalary;
-            if (newSalary < 0) {
+
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\n| Please enter a valid number!" << endl;
+                newSalary = -1;
+            }
+            else if (newSalary < 0) {
                 cout << "\n| The salary must be positive!" << endl;
             }
         } while (newSalary < 0);
